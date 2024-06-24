@@ -6,8 +6,8 @@
     + Logout
     + ErrorPage
     + Forgot Password
-    - Prices
-    - Translate
+    + Prices
+    - Translate (Only facade to go model page look figma)
+    - Model (All model processes)
+    - Profile (payments, credit, changePassword, transactions etc.)
     - Help
-    - Profile
-    - Model

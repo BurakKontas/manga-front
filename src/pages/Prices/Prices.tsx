@@ -29,10 +29,28 @@ function Prices() {
 export default Prices;
 
 function ItemComponent({ item }: { item: Item }) {
+  const { createPayment } = usePayment();
+
+  const handleBuy = () => {
+    createPayment([item.itemId], window.location.href, "TRY").then((res) => {
+      if (res.success) {
+        window.location.href = res.value.paymentPageUrl;  
+      }
+    })
+  }
+
   return (
-    <div>
-      <h1>{item.name}</h1>
-      <p>{item.price}</p>
+    <div className={styles.card} onClick={handleBuy}>
+      <div className={styles.imageContainer}>
+        <img className={styles.image} src={item.imageUri} alt={item.name} />
+      </div>
+      <div className={styles.content}>
+        <h2 className={styles.title}>{item.name}</h2>
+        <p className={styles.description}>{item.description}</p>
+        <div className={styles.details}>
+          <p className={styles.price}>Price: ₺{item.price.toFixed(2)}</p>
+        </div>
+      </div>
     </div>
   )
 }

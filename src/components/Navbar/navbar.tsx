@@ -5,9 +5,21 @@ import auth from '@Redux/Auth';
 
 import styles from './navbar.module.scss';
 import { useAppSelector } from '@Redux/hooks';
+import { usePayment } from '@Hooks/usePayment';
 
 const Navbar: React.FC<NavbarProps> = ({ className = '', style = {}}) => {
+  const [credit, setCredit] = React.useState<number>(0);
+  
+  const { getUserCredit } = usePayment();
   var isLoggedIn = useAppSelector(auth.selectors.isLoggedIn);
+
+  React.useEffect(() => {
+    getUserCredit().then((res) => {
+      if (res.success) {
+        setCredit(res.value.credit);
+      }
+    })
+  }, [])
 
   return (
     <nav className={`${styles.container} ${className}`} style={style}>
@@ -20,7 +32,7 @@ const Navbar: React.FC<NavbarProps> = ({ className = '', style = {}}) => {
       <div className={styles.right}>
         {(isLoggedIn) ?
           <>
-            <p className={styles.credit}>Credit: 10</p>
+            <p className={styles.credit}>Credit: {credit}</p>
             <Link to="/help">Help</Link>
             <Link to="/logout">Logout</Link>
             <Link to="/profile">Profile</Link>
