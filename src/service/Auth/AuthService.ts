@@ -103,6 +103,7 @@ class AuthService implements IAuthService {
         }
     }
     setToken(token: string, refreshToken: string, rememberMe: boolean): string {
+        //TODO: add these to redux if not remember me do not add refreshtoken
         if(rememberMe) {
             localStorage.setItem('token', token);
             localStorage.setItem('refreshToken', refreshToken);

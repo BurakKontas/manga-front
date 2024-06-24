@@ -16,19 +16,19 @@
     // Tarayıcı dark mode destekliyorsa
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
       // Dark mode ise, icon_black.svg kullan
-      document.getElementById('favicon').href = '/src/assets/icon_white.png';
+      document.getElementById('favicon').href = 'icon_white.png';
     } else {
       // Light mode ise, icon_white.svg kullan
-      document.getElementById('favicon').href = '/src/assets/icon_black.png';
+      document.getElementById('favicon').href = 'icon_black.png';
     }
 
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
         if (e.matches) {
           // Dark mode ise, icon_black.svg kullan
-          document.getElementById('favicon').href = '/src/assets/icon_white.png';
+          document.getElementById('favicon').href = 'icon_white.png';
         } else {
           // Light mode ise, icon_white.svg kullan
-          document.getElementById('favicon').href = '/src/assets/icon_black.png';
+          document.getElementById('favicon').href = 'icon_black.png';
         }
       });
   </script>
