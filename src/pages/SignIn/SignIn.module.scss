@@ -11,7 +11,8 @@
 }
 
 .leftImage {
-    min-height: 130vh;
+    min-height: 150vh;
+    margin-left: -60px;
     border: 2px solid black;
     flex:0.4;
     background-color: aliceblue;
@@ -24,8 +25,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.formContainer {
+    flex:0.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    gap: 50px
+    gap: 50px;
 }
 
 .form {
@@ -37,7 +45,7 @@
 .greeting {
     display: flex;
     flex-direction: column;
-    width: 610px;
+    width: 100%;
 
     span {
         font-size: 20px;
@@ -112,10 +120,10 @@
 .registerhere {
     display: flex;
     text-align: left;
-    width: 610px;
     gap: 5px;
     font-size: 20px;
     font-weight: 400;
+    width: 100%;
 
     a {
         color: #090446;

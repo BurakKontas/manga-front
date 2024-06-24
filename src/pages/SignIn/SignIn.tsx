@@ -43,39 +43,41 @@ function SignIn() {
   return (
     <div className={styles.container}>
       <div className={styles.leftImage} />
-      <main className={styles.content}>
-        <div className={styles.greeting}>
-          <span className={styles.welcome}>Welcome Back!</span>
-          <span>Sign in to your account to continue</span>
-        </div>
-        <div className={styles.form}>
-          <FormInput title="Email" onChange={(e: HTMLInputElement) => setEmail(e.value)} value={email} />
-          <div className={styles.passwordContainer}>
-            <FormInput type={(showPassword) ? "text" : "password"} title="Password" onChange={(e: HTMLInputElement) => setPassword(e.value)} value={password} />
-            <button onClick={() => setShowPassword(!showPassword)}>{(showPassword) ? "Hide" : "Show"}</button>
+      <div className={styles.content}>
+        <main className={styles.formContainer}>
+          <div className={styles.greeting}>
+            <span className={styles.welcome}>Welcome Back!</span>
+            <span>Sign in to your account to continue</span>
           </div>
-          <div className={styles.formBottom}>
-            <div className={styles.rememberMe}>
-              <input className={styles.rememberMeCheck} type="checkbox" id="remember" name="remember" onChange={(e) => setRememberMe(e.target.checked)} checked={rememberMe} />
-              <label htmlFor="remember">Remember me</label>
+          <div className={styles.form}>
+            <FormInput title="Email" onChange={(e: HTMLInputElement) => setEmail(e.value)} value={email} />
+            <div className={styles.passwordContainer}>
+              <FormInput type={(showPassword) ? "text" : "password"} title="Password" onChange={(e: HTMLInputElement) => setPassword(e.value)} value={password} />
+              <button onClick={() => setShowPassword(!showPassword)}>{(showPassword) ? "Hide" : "Show"}</button>
             </div>
-            <Link className={styles.forgotpassword} to="/forgotpassword">Forgot password?</Link>
+            <div className={styles.formBottom}>
+              <div className={styles.rememberMe}>
+                <input className={styles.rememberMeCheck} type="checkbox" id="remember" name="remember" onChange={(e) => setRememberMe(e.target.checked)} checked={rememberMe} />
+                <label htmlFor="remember">Remember me</label>
+              </div>
+              <Link className={styles.forgotpassword} to="/forgotpassword">Forgot password?</Link>
+            </div>
+            <button className={styles.signin} onClick={loginHandler}>Sign In</button>
           </div>
-          <button className={styles.signin} onClick={loginHandler}>Sign In</button>
-        </div>
-        <div className={styles.oauth2}>
-          <span>OR LOGIN WITH</span>
-          <div className={styles.oauth2Buttons}>
-            <Link to={googleLoginUri} className={styles.google}>
-              <img src={GoogleImage} alt="googleimage" />
-            </Link>
-          </div>            
-        </div>
-        <div className={styles.registerhere}>
-          <span>Don't have an account?</span>
-          <Link to="/signup">Register here</Link>
-        </div>
-      </main>
+          <div className={styles.oauth2}>
+            <span>OR LOGIN WITH</span>
+            <div className={styles.oauth2Buttons}>
+              <Link to={googleLoginUri} className={styles.google}>
+                <img src={GoogleImage} alt="googleimage" />
+              </Link>
+            </div>
+          </div>
+          <div className={styles.registerhere}>
+            <span>Don't have an account?</span>
+            <Link to="/signup">Register here</Link>
+          </div>
+        </main>
+      </div>
     </div>
   )
 }
