@@ -5,7 +5,7 @@ export interface IAuthService {
     forgotPassword(changePasswordId: string, newPassword: string):Promise<Result<string>>;
 
     //queries
-    login(email: string, password: string, rememberMe: boolean):Promise<Result<LoginResponse>>;
+    login(email: string, password: string):Promise<Result<LoginResponse>>;
     register(email: string, firstName: string, lastName: string, password: string):Promise<Result<RegisterResponse>>;
     roleCheck(email: string, role: string):Promise<Result<RoleCheckResponse>>;
     validateToken():Promise<Result<ValidateTokenResponse>>;
@@ -13,18 +13,17 @@ export interface IAuthService {
     resendEmailVerification(email: string):Promise<Result<ResendEmailVerificationResponse>>;
     generateGoogleLoginUri():Promise<Result<GenerateGoogleLoginUriResponse>>;
     getAllErrorCodes():Promise<Result<GetAllErrorCodesResponse>>;
-    emailVerification(oneTimeCode: string, verificationId: string):Promise<Result<EmailVerificationResponse>>;
+    emailVerification(oneTimeCode: string, registrationId: string):Promise<Result<EmailVerificationResponse>>;
     changePassword(email: string, currentPassword:string, newPassword: string):Promise<Result<ChangePasswordResponse>>;
     getUserDetailsFromToken():Promise<Result<GetUserDetailsFromTokenResponse>>;
 
     //helpers
     getToken(): string;
-    setToken(token: string, refreshToken: string, rememberMe: boolean): string;
 }
 
 export type LoginResponse = {
     token: string;
-    refreshToken: string;
+    refreshToken?: string;
 }
 
 export type RegisterResponse = {

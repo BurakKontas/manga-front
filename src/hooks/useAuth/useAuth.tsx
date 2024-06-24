@@ -2,6 +2,7 @@ import React, { createContext, useContext } from "react";
 import { AuthProviderPropsType, AuthProviderValueType } from "./useAuth.types";
 import { LoginResponse, RegisterResponse, RoleCheckResponse, ValidateTokenResponse, RefreshTokenResponse, ResendEmailVerificationResponse, GenerateGoogleLoginUriResponse, GetAllErrorCodesResponse, EmailVerificationResponse, GetUserDetailsFromTokenResponse, ChangePasswordResponse } from "@/service/Auth/AuthService.types";
 import { AuthService } from "../../service/Auth";
+import { useAppDispatch } from "@Redux/hooks";
 
 export const AuthContext = createContext<AuthProviderValueType>({
     logout: function (): Promise<Result<string>> {
@@ -60,11 +61,12 @@ export const useAuth = () => {
 
 
 const AuthProvider: React.FC<AuthProviderPropsType> = (props) => {
+
     var authService = new AuthService();
     const logout = () => authService.logout();
     const sendForgotPasswordEmail = (email: string)  => authService.sendForgotPasswordEmail(email);
-    const forgotPassword = authService.forgotPassword;
-    const login = (email: string, password: string, rememberMe: boolean) => authService.login(email, password, rememberMe);
+    const forgotPassword = (changePasswordId: string, newPassword: string) => authService.forgotPassword(changePasswordId, newPassword);
+    const login = (email: string, password: string) => authService.login(email, password);
     const register = (email:string, firstName: string, lastName: string, password: string) => authService.register(email, firstName, lastName, password);
     const roleCheck = (email: string, role: string) => authService.roleCheck(email, role);
     const validateToken = () => authService.validateToken();

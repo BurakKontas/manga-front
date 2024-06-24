@@ -1,17 +1,17 @@
 import storage from "redux-persist/lib/storage";
 import { PersistConfig } from 'redux-persist';
-import { ICounterState } from "./Counter";
+import { IAuthState } from "./Auth";
 
 
 type PersistConfigsType = {
-    counter : PersistConfig<ICounterState>
+    auth : PersistConfig<IAuthState>
 }
 
 const PersistConfigs: PersistConfigsType = {
-    counter: {
-        key: 'counter',
+    auth: {
+        key: 'auth',
         storage,
-        whitelist: ['counter'],
+        whitelist: ['isLoggedIn', 'token', 'refreshToken'],
     },
 }
 

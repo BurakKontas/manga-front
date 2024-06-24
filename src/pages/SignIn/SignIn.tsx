@@ -2,11 +2,15 @@ import React from 'react';
 
 import { FormInput } from '@Components/FormInput';
 import { Link, useNavigate } from 'react-router-dom';
-import GoogleImage from '@Assets/google.png';
 
-import styles from './SignIn.module.scss';
 import { useAuth } from '@Hooks/useAuth';
 import { useToast } from '@Hooks/useToast';
+
+import styles from './SignIn.module.scss';
+import GoogleImage from '@Assets/google.png';
+import MangaBaseImage from '@Assets/manga-base.png';
+import { useAppDispatch } from '@Redux/hooks';
+import auth from '@Redux/Auth';
 
 function SignIn() {
   const [email, setEmail] = React.useState('');
@@ -17,6 +21,7 @@ function SignIn() {
   const { login, generateGoogleLoginUri } = useAuth();
   const { success, error } = useToast();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   React.useEffect(() => {
     async function getGoogleLoginUri() {
@@ -33,8 +38,13 @@ function SignIn() {
   async function loginHandler() {
     var response = await login(email, password, rememberMe);
     if(response.success) {
+      dispatch(auth.actions.saveToken({
+        token: response.value.token,
+        refreshToken: response.value.refreshToken
+      }));
       success('Login', 'Login successful');
       navigate('/');
+      window.location.reload();
     } else {
       error('Login', response.errorMessage);
     }
@@ -42,7 +52,9 @@ function SignIn() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.leftImage} />
+      <div className={styles.leftImage} style={{
+        backgroundImage: `url(${MangaBaseImage})`
+      }} />
       <div className={styles.content}>
         <main className={styles.formContainer}>
           <div className={styles.greeting}>

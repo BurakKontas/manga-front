@@ -3,20 +3,24 @@ import StartTranslatingImage from '@Assets/start-translating-image.png'
 import GetStartedImage from '@Assets/get-started.png'
 import styles from './Homepage.module.scss'
 import { useEffect } from 'react';
+import { useAppDispatch } from '@Redux/hooks';
+import auth from '@Redux/Auth';
 
 function Homepage() {
+  var dispatch = useAppDispatch();
   const handleSaveTokens = () => {
     const urlParams = new URLSearchParams(window.location.hash);
     const token = urlParams.get('#token');
     const refreshToken = urlParams.get('refreshToken');
     const status = urlParams.get('status');
 
-    console.log(token, refreshToken, status)
-
     if (status === "success" && token !== null && refreshToken !== null) {
-      localStorage.setItem('token', token);
-      localStorage.setItem('refreshToken', refreshToken);
+      dispatch(auth.actions.saveToken({
+        token: token,
+        refreshToken: refreshToken
+      }))
       window.location.hash = "";
+      window.location.reload();
     }
   };
 

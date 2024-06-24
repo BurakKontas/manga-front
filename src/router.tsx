@@ -10,6 +10,9 @@ import { ErrorPage } from "@Pages/ErrorPage";
 import { ForgotPassword } from "@Pages/ForgotPassword";
 import { Profile } from "@Pages/Profile";
 import { Logout } from "@Pages/Logout";
+import { EmailVerification } from "@Pages/EmailVerification";
+import { Prices } from "@Pages/Prices";
+import { ForgotPasswordEmailSend } from "@Pages/ForgotPasswordEmailSend";
 
 const Router = () => {
     return (
@@ -20,10 +23,13 @@ const Router = () => {
                 {Route("/model", <Model />)}
                 {Route("/help", <Help />)}
                 {Route("/profile", <Profile />)}
+                {Route("/signin", <SignIn />)}
+                {Route("/signup", <SignUp />)}
+                {Route("/email-verification", <EmailVerification />)}
+                {Route("/prices", <Prices />)}
                 {Route("/logout", <Logout />, false)}
-                {Route("/signin", <SignIn />, false)}
-                {Route("/signup", <SignUp />, false)}
-                {Route("/forgotpassword", <ForgotPassword />, false)}
+                {Route("/forgotpassword", <ForgotPasswordEmailSend />)}
+                {Route("/forgotpassword/:changePasswordId", <ForgotPassword />, false)}
                 {Route("*", <ErrorPage />, false)}
             </Routes>
         </BrowserRouter>

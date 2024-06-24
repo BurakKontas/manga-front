@@ -1,7 +1,13 @@
 - Pages
-    - Home
-    - Sign In
-    - Signup
-    - Email Verification
+    + Home
+    + Sign In
+    + Signup
+    + Email Verification
+    + Logout
+    + ErrorPage
+    + Forgot Password
+    - Prices
     - Translate
     - Help
+    - Profile
+    - Model

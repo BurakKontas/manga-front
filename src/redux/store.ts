@@ -2,10 +2,10 @@ import { configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import PersistConfigs from "./persist.config";
 
-import counter from "./Counter"
+import auth from "./Auth"
 
 const rootReducer = {
-    counter: persistReducer(PersistConfigs.counter, counter.slice),
+    auth: persistReducer(PersistConfigs.auth, auth.slice),
 };
 
 // Configure store

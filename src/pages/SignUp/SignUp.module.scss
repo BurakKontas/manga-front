@@ -1,8 +1,212 @@
 .container {
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    min-height: 10vh;
+    background-color: white;
+    color: #090446;
+    background-color: white;
+    overflow: hidden;
+}
+
+.rightImage {
+    position: relative;
+    max-height: 150vh;
+    top: -170px;
+    right: -300px;
+    height: 150vh;
+    width: 50%;
+    border: 2px solid black;
+    margin-top: -70px;
+    background-color: aliceblue;
+    border-radius: 100% 0 0 100%;
+}
+
+.content {
+    flex: 0.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+    margin-left: 10%;
+}
+
+.formContainer {
+    flex: 0.6;
+    margin-top: 25px;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    width: 100vw;
+    gap: 20px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.greeting {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    span {
+        font-size: 20px;
+        text-align: left;
+    }
+
+    .welcome {
+        font-size: 50px;
+        font-weight: 900;
+    }
+}
+
+.rememberMe {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+
+    label {
+        font-size: 20px;
+    }
+}
+
+.forgotpassword {
+    font-size: 20px;
+    color: #090446;
+    cursor: pointer;
+    transition: 0.3s color;
+    text-decoration: none;
+}
+
+.rememberMeCheck {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: rgba(9, 4, 70, 0.2);
+    border: none;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: 0.3s background-color;
+}
+
+.rememberMeCheck:checked {
+    transition: 0.3s background-color;
+    background-color: rgba(9, 4, 70, 0.7);
+}
+
+.formBottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%
+}
+
+.signin {
+    background-color: #090446;
+    color: white;
+    border: none;
+    padding: 20px 20px;
+    border-radius: 10px;
+    min-width: 575px;
+    cursor: pointer;
+    transition: 0.3s background-color;
+    font-size: 20px;
+    font-weight: bold;
+
+    &:hover {
+        background-color: rgb(75, 74, 74);
+    }
+}
+
+.registerhere {
+    display: flex;
+    text-align: left;
+    gap: 5px;
+    font-size: 20px;
+    font-weight: 400;
+    width: 100%;
+
+    a {
+        color: #090446;
+        cursor: pointer;
+        transition: 0.3s color;
+        text-decoration: none;
+        font-weight: 700;
+
+        &:hover {
+            color: rgb(75, 74, 74);
+        }
+    }
+}
+
+.oauth2 {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    span {
+        font-size: 20px;
+        font-weight: 500;
+    }
+}
+
+.oauth2Buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+    a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        height: 65px;
+        width: 65px;
+        border-radius: 50%;
+        border: none;
+        background-color: rgba(9, 4, 70, 0.1);
+
+        img {
+            height: 50px;
+            width: 50px;
+        }
+    }
+}
+
+.passwordContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+
+    label {
+        font-size: 20px;
+    }
+
+    button {
+        position: absolute;
+        right: 1;
+        top: 1;
+        margin-top: 30px;
+        margin-left: 550px;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        font-size: 18px;
+        color: #090446;
+    }
+}
+
+.formNames {
+    display: flex;
+    gap: 20px; 
 }
