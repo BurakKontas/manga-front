@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- Dinamik favicon için -->
+  <link rel="icon" type="image/svg+xml" id="favicon" href="/src/assets/icon_white.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MangaTranslator</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+  <script>
+    // Tarayıcı dark mode destekliyorsa
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      // Dark mode ise, icon_black.svg kullan
+      document.getElementById('favicon').href = '/src/assets/icon_white.png';
+    } else {
+      // Light mode ise, icon_white.svg kullan
+      document.getElementById('favicon').href = '/src/assets/icon_black.png';
+    }
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (e.matches) {
+          // Dark mode ise, icon_black.svg kullan
+          document.getElementById('favicon').href = '/src/assets/icon_white.png';
+        } else {
+          // Light mode ise, icon_white.svg kullan
+          document.getElementById('favicon').href = '/src/assets/icon_black.png';
+        }
+      });
+  </script>
+</body>
+
+</html>
