@@ -35,12 +35,12 @@ class AuthService implements IAuthService {
         var response = await this.instance.post<Result<RoleCheckResponse>>(endpoints.ROLE_CHECK, { email: email, role: role });
         return this.statusCheck(response.data);
     }
-    async validateToken(): Promise<Result<ValidateTokenResponse>> {
-        var response = await this.instance.post<Result<ValidateTokenResponse>>(endpoints.VALIDATE_TOKEN, { token: this.getToken() });
+    async validateToken(token: string): Promise<Result<ValidateTokenResponse>> {
+        var response = await this.instance.post<Result<ValidateTokenResponse>>(endpoints.VALIDATE_TOKEN, { token: token });
         return this.statusCheck(response.data);
     }
-    async refreshToken(): Promise<Result<RefreshTokenResponse>> {
-        var response = await this.instance.post<Result<RefreshTokenResponse>>(endpoints.REFRESH_TOKEN, { token: this.getToken() });
+    async refreshToken(refreshToken: string): Promise<Result<RefreshTokenResponse>> {
+        var response = await this.instance.post<Result<RefreshTokenResponse>>(endpoints.REFRESH_TOKEN, { refreshToken: refreshToken });
         return this.statusCheck(response.data);
     }
     async resendEmailVerification(email: string): Promise<Result<ResendEmailVerificationResponse>> {
@@ -63,8 +63,8 @@ class AuthService implements IAuthService {
         var response = await this.instance.post<Result<ChangePasswordResponse>>(endpoints.CHANGE_PASSWORD, { email: email, currentPassword: currentPassword, newPassword: newPassword });
         return this.statusCheck(response.data);
     }
-    async getUserDetailsFromToken(): Promise<Result<GetUserDetailsFromTokenResponse>> {
-        var response = await this.instance.post<Result<GetUserDetailsFromTokenResponse>>(endpoints.GET_USER_DETAILS_FROM_TOKEN, { token: this.getToken() });
+    async getUserDetailsFromToken(token: string): Promise<Result<GetUserDetailsFromTokenResponse>> {
+        var response = await this.instance.post<Result<GetUserDetailsFromTokenResponse>>(endpoints.GET_USER_DETAILS_FROM_TOKEN, { token: token });
         return this.statusCheck(response.data);
     }
 
@@ -80,22 +80,6 @@ class AuthService implements IAuthService {
     async forgotPassword(changePasswordId: string, newPassword: string): Promise<any> {
         var response = await this.instance.post<Result<any>>(endpoints.FORGOT_PASSWORD, { changePasswordId: changePasswordId, newPassword: newPassword });
         return this.statusCheck(response.data);
-    }
-
-    getToken(): string {
-        let token = sessionStorage.getItem('refreshToken');
-
-        if (token) {
-            return token;
-        } else {
-            token = localStorage.getItem('refreshToken');
-
-            if (token) {
-                return token;
-            } else {
-                throw new Error('No token found');
-            }
-        }
     }
     
     private statusCheck(response: Result<any>, onSuccess: Function = () => {}): any {

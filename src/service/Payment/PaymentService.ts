@@ -1,12 +1,15 @@
 import axios, { AxiosInstance } from "axios";
 import { CreatePaymentResponse, GetItemsResponse, GetUserCreditResponse, IPaymentService, Item, Payment } from "./PaymentService.types";
 import { AuthService, IAuthService } from "../Auth";
+import { useAppDispatch } from "@Redux/hooks";
+import auth from "@Redux/Auth";
 class PaymentService implements IPaymentService {
     private readonly endpoint = 'https://api.mangatranslator.com.tr/payment/api/v1';
     private readonly instance: AxiosInstance;
     private readonly authService: IAuthService;
+    private refreshToken: string;
 
-    constructor(token: string) {
+    constructor(token: string, refreshToken: string) {
         this.authService = new AuthService();
         this.instance = axios.create({
             baseURL: this.endpoint,
@@ -16,7 +19,8 @@ class PaymentService implements IPaymentService {
             },
             
         });
-
+        
+        this.refreshToken = refreshToken;
         this.setupInterceptors();
     }
 
@@ -26,10 +30,11 @@ class PaymentService implements IPaymentService {
                 return response;
             },
             async (error) => {
-                if (error.response && error.response.status === 608) {
-                    await this.authService.refreshToken();
-                    const originalRequest = error.config;
-                    return this.instance(originalRequest);
+                if (error.response && error.response.status === 608 || error.response.status === 401) {
+                    if (this.refreshToken != null) {
+                        await this.authService.refreshToken(this.refreshToken);
+                        return this.instance.request(error.config);
+                    }
                 }
                 return error.response;
             }

@@ -14,11 +14,11 @@ function Providers({ children }: { children: React.ReactNode }) {
                 <ToastProvider>
                     <AuthProvider>
                         <APIProvider>
-                                <CDNProvider>
-                                    <PaymentProvider>
-                                        {children}
-                                    </PaymentProvider>
-                                </CDNProvider>
+                            <CDNProvider>
+                                <PaymentProvider>
+                                    {children}
+                                </PaymentProvider>
+                            </CDNProvider>
                         </APIProvider>
                     </AuthProvider>
                 </ToastProvider>

@@ -33,13 +33,11 @@ const Navbar: React.FC<NavbarProps> = ({ className = '', style = {}}) => {
         {(isLoggedIn) ?
           <>
             <p className={styles.credit}>Credit: {credit}</p>
-            <Link to="/help">Help</Link>
             <Link to="/logout">Logout</Link>
             <Link to="/profile">Profile</Link>
           </>
           :
           <>
-            <Link to="/help">Help</Link>
             <Link to="/signin">Sign In</Link>
             <Link to="/signup" className={styles.signup}>Sign Up</Link>
           </>

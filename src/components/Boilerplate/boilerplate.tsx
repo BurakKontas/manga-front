@@ -13,10 +13,8 @@ const Boilerplate: React.FC<BoilerplateProps> = ({ className = '', style = {}, c
       const scrollTop = window.scrollY;
       if (scrollTop > 0) {
         setIsScrolled(true);
-        console.log('scrolled')
       } else {
         setIsScrolled(false);
-        console.log('not scrolled')
       }
     };
 
