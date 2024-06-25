@@ -37,7 +37,7 @@ class AuthService implements IAuthService {
     }
     async validateToken(): Promise<Result<ValidateTokenResponse>> {
         var token = localStorage.getItem('token');
-        if(!token) return { value: { isValid: false }, success: true, code: 200, errorMessage: "" };
+        if(token === null) return { value: { isValid: false }, success: true, code: 200, errorMessage: "" };
         var response = await this.instance.post<Result<ValidateTokenResponse>>(endpoints.VALIDATE_TOKEN, { token: token });
         return this.statusCheck(response.data);
     }
