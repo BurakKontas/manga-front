@@ -7,10 +7,10 @@ class PaymentService implements IPaymentService {
     private readonly endpoint = 'https://api.mangatranslator.com.tr/payment/api/v1';
     private readonly instance: AxiosInstance;
     private readonly authService: IAuthService;
-    private refreshToken: string;
 
-    constructor(token: string, refreshToken: string) {
+    constructor() {
         this.authService = new AuthService();
+        var token = localStorage.getItem('token');
         this.instance = axios.create({
             baseURL: this.endpoint,
             headers: {
@@ -20,20 +20,26 @@ class PaymentService implements IPaymentService {
             
         });
         
-        this.refreshToken = refreshToken;
         this.setupInterceptors();
     }
 
     private setupInterceptors() {
         this.instance.interceptors.response.use(
-            (response) => {
-                return response;
-            },
-            async (error) => {
-                if (error.response && error.response.status === 608 || error.response.status === 401) {
-                    if (this.refreshToken != null) {
-                        await this.authService.refreshToken(this.refreshToken);
-                        return this.instance.request(error.config);
+            response => response,
+            async error => {
+                console.log(error)
+                if (error.response && (error.response.status === 608 || error.response.status === 401)) {
+                    var isRefreshToken = localStorage.getItem('refreshToken') !== null;
+                    if (isRefreshToken && error.config.headers['X-TRY-COUNT'] < 2) {
+                        try {
+                            const response = await this.authService.refreshToken();
+                            error.config.headers['Authorization'] = `Bearer ${response.value.token}`;
+                            this.instance.defaults.headers['Authorization'] = `Bearer ${response.value.token}`;
+                            this.instance.defaults.headers['X-TRY-COUNT'] = (error.config.headers['X-TRY-COUNT'] || 0) + 1;
+                            return this.instance.request(error.config);
+                        } catch (refreshError) {
+                            console.error('Token yenileme başarısız:', refreshError);
+                        }
                     }
                 }
                 return error.response;

@@ -35,15 +35,12 @@ export const useAPI = () => {
 
 
 const APIProvider: React.FC<APIProviderPropsType> = (props) => {
-    var refToken = useAppSelector(auth.selectors.getRefreshToken);
-    var token = useAppSelector(auth.selectors.getToken);
-
-    var apiService = new APIService(token, refToken!);
+    var apiService = new APIService();
 
     const clean = (file: File) => apiService.clean(file);
-    const ocr = (file: File, predBoxes: number[][]) => apiService.ocr(file, predBoxes);
+    const ocr = (file: string, predBoxes: number[][]) => apiService.ocr(file, predBoxes);
     const translate = (text: string, target: string, source: string) => apiService.translate(text, target, source);
-    const write = (file: File, data: WriteData[]) => apiService.write(file, data);
+    const write = (file: string, data: WriteData[]) => apiService.write(file, data);
     const modelPricing = () => apiService.modelPricing();
 
     return (

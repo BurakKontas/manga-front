@@ -3,9 +3,11 @@ import { persistReducer, persistStore } from "redux-persist";
 import PersistConfigs from "./persist.config";
 
 import auth from "./Auth"
+import credit from "./Credit"
 
 const rootReducer = {
     auth: persistReducer(PersistConfigs.auth, auth.slice),
+    credit: persistReducer(PersistConfigs.credit, credit.slice),
 };
 
 // Configure store

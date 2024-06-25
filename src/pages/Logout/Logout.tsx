@@ -11,6 +11,8 @@ function Logout() {
 
   const logoutHandler = async () => {
     dispatch(auth.actions.logout())
+    localStorage.removeItem('token')
+    localStorage.removeItem('refreshToken')
     navigate('/')
   }
 

@@ -7,7 +7,11 @@ import { DropZoneProps } from './DropZone.types';
 const DropZone: React.FC<DropZoneProps> = ({ className = '', style = {}, onDrop }) => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
+    onDrop: (acceptedFiles) => {
+      if (acceptedFiles.length > 0) {
+        onDrop(acceptedFiles[0]); // Sadece ilk kabul edilen dosyayı işleyelim
+      }
+    },
     //@ts-ignore
     accept: 'image/*',
     maxFiles: 1
@@ -20,7 +24,7 @@ const DropZone: React.FC<DropZoneProps> = ({ className = '', style = {}, onDrop 
         {
           isDragActive ?
             <p className={styles.drophere}>Drop here!</p> :
-            <button type="button">Upload File</button>
+            <button type="button" style={{width: 130}}>Upload File</button>
         }
       </div>
     </div>

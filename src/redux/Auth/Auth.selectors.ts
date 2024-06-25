@@ -6,12 +6,14 @@ class AuthSelectors {
         return state.isLoggedIn;
     }
 
-    private static getRefreshToken(state: IAuthState) {
-        return state.refreshToken;
+    private static getRefreshToken() {
+        var refreshToken = localStorage.getItem('refreshToken');
+        return refreshToken;
     }
 
-    private static getToken(state: IAuthState) {
-        return state.token;
+    private static getToken() {
+        var token = localStorage.getItem('token');
+        return token;
     }
 
     public static selectors() {

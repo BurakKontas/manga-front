@@ -8,8 +8,8 @@ export interface IAuthService {
     login(email: string, password: string):Promise<Result<LoginResponse>>;
     register(email: string, firstName: string, lastName: string, password: string):Promise<Result<RegisterResponse>>;
     roleCheck(email: string, role: string):Promise<Result<RoleCheckResponse>>;
-    validateToken(token: string):Promise<Result<ValidateTokenResponse>>;
-    refreshToken(refreshToken: string):Promise<Result<RefreshTokenResponse>>;
+    validateToken():Promise<Result<ValidateTokenResponse>>;
+    refreshToken():Promise<Result<RefreshTokenResponse>>;
     resendEmailVerification(email: string):Promise<Result<ResendEmailVerificationResponse>>;
     generateGoogleLoginUri():Promise<Result<GenerateGoogleLoginUriResponse>>;
     getAllErrorCodes():Promise<Result<GetAllErrorCodesResponse>>;

@@ -35,10 +35,7 @@ export const usePayment = () => {
 
 
 const PaymentProvider: React.FC<PaymentProviderPropsType> = (props) => {
-    const token = useAppSelector(auth.selectors.getToken)
-    const refreshToken = useAppSelector(auth.selectors.getRefreshToken)
-
-    var paymentService = new PaymentService(token, refreshToken!);
+    var paymentService = new PaymentService();
 
     const getUserCredit = () => paymentService.getUserCredit();
     const getItems = () => paymentService.getItems();

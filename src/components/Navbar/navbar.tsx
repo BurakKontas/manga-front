@@ -7,19 +7,11 @@ import styles from './navbar.module.scss';
 import { useAppSelector } from '@Redux/hooks';
 import { usePayment } from '@Hooks/usePayment';
 
-const Navbar: React.FC<NavbarProps> = ({ className = '', style = {}}) => {
-  const [credit, setCredit] = React.useState<number>(0);
-  
-  const { getUserCredit } = usePayment();
-  var isLoggedIn = useAppSelector(auth.selectors.isLoggedIn);
+import credit from '@Redux/Credit';
 
-  React.useEffect(() => {
-    getUserCredit().then((res) => {
-      if (res.success) {
-        setCredit(res.value.credit);
-      }
-    })
-  }, [])
+const Navbar: React.FC<NavbarProps> = ({ className = '', style = {}}) => {
+  const userCredit = useAppSelector(credit.selectors.getCredit);
+  var isLoggedIn = useAppSelector(auth.selectors.isLoggedIn);
 
   return (
     <nav className={`${styles.container} ${className}`} style={style}>
@@ -32,9 +24,8 @@ const Navbar: React.FC<NavbarProps> = ({ className = '', style = {}}) => {
       <div className={styles.right}>
         {(isLoggedIn) ?
           <>
-            <p className={styles.credit}>Credit: {credit}</p>
+            <p className={styles.credit}>Credit: {userCredit}</p>
             <Link to="/logout">Logout</Link>
-            <Link to="/profile">Profile</Link>
           </>
           :
           <>

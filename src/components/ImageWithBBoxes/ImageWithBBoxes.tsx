@@ -2,8 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { ImageWithBBoxesProps } from './ImageWithBBoxes.types';
 import styles from './ImageWithBBoxes.module.scss';
 
-const ImageWithBBoxes: React.FC<ImageWithBBoxesProps> = ({ imageSrc, bboxes, setBBoxes }) => {
-  const [selectedBBox, setSelectedBBox] = useState<number | null>(null);
+const ImageWithBBoxes: React.FC<ImageWithBBoxesProps> = ({ imageSrc, bboxes, setBBoxes, selectedBBox, setSelectedBBox }) => {
   const [dimensions, setDimensions] = useState({ width: 1, height: 1 });
   const [normalizedBBoxes, setNormalizedBBoxes] = useState<number[][]>([]);
   const resizingRef = useRef<{ index: number; dir: string; startX: number; startY: number; startBBox: number[]; } | null>(null);
@@ -150,7 +149,7 @@ const ImageWithBBoxes: React.FC<ImageWithBBoxesProps> = ({ imageSrc, bboxes, set
           onMouseDown={handleDragStart(index)}
         >
           <div className={`${styles.resizer} ${styles['top-left']}`} onMouseDown={handleMouseDown(index, 'top-left')} >
-            <span className={styles.index}>{index}</span>
+            <span className={styles.index}>{index + 1}</span>
           </div>
           <div className={`${styles.resizer} ${styles['top-right']}`} onMouseDown={handleMouseDown(index, 'top-right')} />
           <div className={`${styles.resizer} ${styles['bottom-left']}`} onMouseDown={handleMouseDown(index, 'bottom-left')} />

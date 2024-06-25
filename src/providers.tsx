@@ -6,6 +6,7 @@ import CDNProvider from '@Hooks/useCDN/useCDN.tsx';
 import PaymentProvider from '@Hooks/usePayment/usePayment.tsx';
 import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
 import ToastProvider from '@Hooks/useToast/useToast.tsx';
+import StartupProvider from '@Hooks/useStartup/useStartup.tsx';
 
 function Providers({ children }: { children: React.ReactNode }) {
     return (
@@ -16,7 +17,9 @@ function Providers({ children }: { children: React.ReactNode }) {
                         <APIProvider>
                             <CDNProvider>
                                 <PaymentProvider>
-                                    {children}
+                                    <StartupProvider>
+                                        {children}
+                                    </StartupProvider>
                                 </PaymentProvider>
                             </CDNProvider>
                         </APIProvider>

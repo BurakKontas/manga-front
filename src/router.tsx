@@ -6,7 +6,6 @@ import { SignIn } from "@Pages/SignIn";
 import { SignUp } from "@Pages/SignUp";
 import { ErrorPage } from "@Pages/ErrorPage";
 import { ForgotPassword } from "@Pages/ForgotPassword";
-import { Profile } from "@Pages/Profile";
 import { Logout } from "@Pages/Logout";
 import { EmailVerification } from "@Pages/EmailVerification";
 import { Prices } from "@Pages/Prices";
@@ -18,7 +17,6 @@ const Router = () => {
             <Routes>
                 {Route('/', <Homepage />)}
                 {Route("/translate", <Translate />)}
-                {Route("/profile", <Profile />)}
                 {Route("/signin", <SignIn />)}
                 {Route("/signup", <SignUp />)}
                 {Route("/email-verification", <EmailVerification />)}

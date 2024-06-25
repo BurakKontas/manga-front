@@ -1,8 +1,8 @@
 export interface IAPIService {
     clean(file: File): Promise<Result<CleanResponse>>;
-    ocr(file: File, predBoxes: number[][]): Promise<Result<OCRResponse>>
+    ocr(base64: string, predBoxes: number[][]): Promise<Result<OCRResponse>>
     translate(text: string, target: string, source: string): Promise<Result<TranslateResponse>>;
-    write(file: File, data: WriteData[]): Promise<Result<WriteResponse>>;
+    write(base64: string, data: WriteData[]): Promise<Result<WriteResponse>>;
     modelPricing(): Promise<Result<ModelPricingResponse>>;
 }
 

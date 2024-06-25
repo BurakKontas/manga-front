@@ -6,8 +6,6 @@ import AuthSelectors from "./Auth.selectors";
 
 const initialState: IAuthState = {
     isLoggedIn: false,
-    token: "",
-    refreshToken: "",
 };
 
 export const AuthSlice = createAppSlice({
