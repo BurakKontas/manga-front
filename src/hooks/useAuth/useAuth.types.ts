@@ -22,5 +22,4 @@ export interface AuthProviderValueType {
     getAllErrorCodes(): Promise<Result<GetAllErrorCodesResponse>>;
     emailVerification(oneTimeCode: string, verificationId: string): Promise<Result<EmailVerificationResponse>>;
     changePassword(email: string, currentPassword: string, newPassword: string): Promise<Result<ChangePasswordResponse>>;
-    getUserDetailsFromToken(): Promise<Result<GetUserDetailsFromTokenResponse>>;
 }

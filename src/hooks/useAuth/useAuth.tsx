@@ -44,9 +44,6 @@ export const AuthContext = createContext<AuthProviderValueType>({
     },
     changePassword: function (): Promise<Result<ChangePasswordResponse>> {
         throw new Error("Function not implemented.");
-    },
-    getUserDetailsFromToken: function (): Promise<Result<GetUserDetailsFromTokenResponse>> {
-        throw new Error("Function not implemented.");
     }
 });
 
@@ -94,7 +91,6 @@ const AuthProvider: React.FC<AuthProviderPropsType> = (props) => {
     const getAllErrorCodes = () => authService.getAllErrorCodes();
     const emailVerification = (oneTimeCode: string, verificationId: string) => authService.emailVerification(oneTimeCode, verificationId);
     const changePassword = (email: string, currentPassword: string, newPassword: string) => authService.changePassword(email, currentPassword, newPassword);
-    const getUserDetailsFromToken = () => authService.getUserDetailsFromToken(token) ;
 
     return (
         <AuthContext.Provider value={{
@@ -111,7 +107,6 @@ const AuthProvider: React.FC<AuthProviderPropsType> = (props) => {
             getAllErrorCodes,
             emailVerification,
             changePassword,
-            getUserDetailsFromToken
         } as AuthProviderValueType}>
             {props.children}
         </AuthContext.Provider>
