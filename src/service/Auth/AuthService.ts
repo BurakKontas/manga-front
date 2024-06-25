@@ -43,6 +43,7 @@ class AuthService implements IAuthService {
     }
     async refreshToken(): Promise<Result<RefreshTokenResponse>> {
         var refreshToken = localStorage.getItem('refreshToken');
+        if(refreshToken === null) return { value: { token: "", refreshToken: "" }, success: false, code: 401, errorMessage: "Refresh token not found" };
         var response = await this.instance.post<Result<RefreshTokenResponse>>(endpoints.REFRESH_TOKEN, { refreshToken: refreshToken });
         return this.statusCheck(response.data, () => {
             localStorage.setItem('token', response.data.value.token);
