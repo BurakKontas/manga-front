@@ -80,9 +80,9 @@ const AuthProvider: React.FC<AuthProviderPropsType> = (props) => {
     };
     const register = (email:string, firstName: string, lastName: string, password: string) => authService.register(email, firstName, lastName, password);
     const roleCheck = (email: string, role: string) => authService.roleCheck(email, role);
-    const validateToken = () => authService.validateToken(token);
+    const validateToken = () => authService.validateToken();
     const refreshToken = async () => {
-        var token = await authService.refreshToken(refToken!);
+        var token = await authService.refreshToken();
         dispatch(auth.actions.saveToken({
             token: token.value.token,
             refreshToken: token.value.refreshToken
