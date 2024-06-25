@@ -15,16 +15,16 @@ import auth from '@Redux/Auth';
 function Translate() {
   const navigate = useNavigate();
   const { success, error, info, warning } = useToast();
-  const isLoggedIn = useAppSelector(auth.selectors.isLoggedIn);
+  var token = localStorage.getItem("token");
 
   React.useEffect(() => {
-    if (!isLoggedIn) {
+    if (token === null) {
       warning("Sign In", "You need to sign in to access this page.")
       navigate("/signin");
     }
   }, [])
 
-  if(!isLoggedIn) return null;
+  if(token === null) return null;
 
   const { clean, modelPricing, ocr, write } = useAPI();
   const [selectedBBox, setSelectedBBox] = React.useState<number>(0);
