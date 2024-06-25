@@ -23,6 +23,7 @@ const StartupProvider: React.FC<StartupProviderPropsType> = (props) => {
             if(refreshToken !== null) {
                 await authService.refreshToken();
                 dispatch(auth.actions.login());
+                dispatch(credit.async_thunks.fetchCredit())
             } else {
                 dispatch(auth.actions.logout());
             }
